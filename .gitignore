@@ -1,0 +1,30 @@
+node_modules
+
+# Environment files with secrets
+.env
+.env.*
+!.env.example
+apps/api/.env
+apps/api/.env.*
+!apps/api/.env.example
+apps/web/.env
+apps/web/.env.*
+!apps/web/.env.example
+
+# Build output
+dist
+build
+coverage
+.vite
+
+# OS/logs
+.DS_Store
+*.log
+
+# Local/private documentation drafts
+docs/
+
+# Local database volume/name leftovers
+weather_app_postgres_data
+
+shadcn

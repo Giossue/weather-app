@@ -1,0 +1,26 @@
+{
+  "compilerOptions": {
+    "target": "ES2022",
+    "lib": ["ES2022", "DOM", "DOM.Iterable"],
+    "module": "ESNext",
+    "moduleResolution": "Bundler",
+    "strict": true,
+    "skipLibCheck": true,
+    "esModuleInterop": true,
+    "forceConsistentCasingInFileNames": true,
+    "resolveJsonModule": true,
+    "isolatedModules": true,
+    "noUncheckedIndexedAccess": true,
+    "baseUrl": ".",
+    "paths": {
+      "@weather-app/contracts": ["packages/contracts/src/index.ts"],
+      "@weather-app/contracts/*": ["packages/contracts/src/*"],
+      "@weather-app/db": ["packages/db/src/index.ts"],
+      "@weather-app/db/*": ["packages/db/src/*"],
+      "@weather-app/shared": ["packages/shared/src/index.ts"],
+      "@weather-app/shared/*": ["packages/shared/src/*"],
+      "@weather-app/config": ["packages/config/src/index.ts"],
+      "@weather-app/config/*": ["packages/config/src/*"]
+    }
+  }
+}

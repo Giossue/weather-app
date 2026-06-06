@@ -1,0 +1,21 @@
+{
+  "name": "@weather-app/db",
+  "version": "0.1.0",
+  "private": true,
+  "type": "module",
+  "exports": {
+    ".": "./src/index.ts",
+    "./*": "./src/*"
+  },
+  "scripts": {
+    "build": "tsc --noEmit -p tsconfig.json",
+    "lint": "tsc --noEmit -p tsconfig.json",
+    "test": "bun test src"
+  },
+  "dependencies": {
+    "drizzle-orm": "^0.44.6"
+  },
+  "devDependencies": {
+    "typescript": "^5.9.3"
+  }
+}

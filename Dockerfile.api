@@ -1,0 +1,23 @@
+FROM oven/bun:1.3.14-alpine
+
+WORKDIR /app
+
+ENV NODE_ENV=production \
+    PORT=3001
+
+COPY package.json bun.lock bunfig.toml tsconfig.base.json ./
+COPY apps/api/package.json apps/api/package.json
+COPY apps/web/package.json apps/web/package.json
+COPY packages/config/package.json packages/config/package.json
+COPY packages/contracts/package.json packages/contracts/package.json
+COPY packages/db/package.json packages/db/package.json
+COPY packages/shared/package.json packages/shared/package.json
+
+RUN bun install --frozen-lockfile --production
+
+COPY apps/api apps/api
+COPY packages packages
+
+EXPOSE 3001
+
+CMD ["sh", "-c", "bun run --cwd apps/api db:migrate && bun run --cwd apps/api start"]
