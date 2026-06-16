@@ -1,10 +1,11 @@
-const CACHE_NAME = "weather-app-shell-v5";
+const CACHE_NAME = "weather-app-shell-v6";
 const SHELL_ASSETS = ["/", "/manifest.webmanifest", "/pwa-icons/icon.svg", "/weather-icons/fallback/weather.svg"];
 
 const putInCache = async (request, response) => {
   if (!response || response.status !== 200 || response.type === "opaque") return;
+  const responseToCache = response.clone();
   const cache = await caches.open(CACHE_NAME);
-  await cache.put(request, response.clone());
+  await cache.put(request, responseToCache);
 };
 
 self.addEventListener("install", (event) => {
@@ -32,7 +33,7 @@ self.addEventListener("fetch", (event) => {
     event.respondWith(
       fetch(event.request)
         .then((response) => {
-          putInCache(event.request, response);
+          putInCache(event.request, response).catch(() => undefined);
           return response;
         })
         .catch(() => caches.match(event.request).then((cached) => cached ?? caches.match("/")))
