@@ -44,6 +44,18 @@ services:
       - "80"
     networks:
       - dokploy-network
+    labels:
+      - "traefik.enable=true"
+      - "traefik.docker.network=dokploy-network"
+      - "traefik.http.services.cielovivo.loadbalancer.server.port=80"
+      - "traefik.http.routers.cielovivo-http.rule=Host(`${APP_HOST:-weather.giossue.com}`)"
+      - "traefik.http.routers.cielovivo-http.entrypoints=web"
+      - "traefik.http.routers.cielovivo-http.service=cielovivo"
+      - "traefik.http.routers.cielovivo-https.rule=Host(`${APP_HOST:-weather.giossue.com}`)"
+      - "traefik.http.routers.cielovivo-https.entrypoints=websecure"
+      - "traefik.http.routers.cielovivo-https.tls=true"
+      - "traefik.http.routers.cielovivo-https.tls.certresolver=letsencrypt"
+      - "traefik.http.routers.cielovivo-https.service=cielovivo"
     healthcheck:
       test:
         ["CMD-SHELL", "wget -qO- http://localhost/ >/dev/null 2>&1 || exit 1"]
