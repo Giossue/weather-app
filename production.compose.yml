@@ -18,6 +18,8 @@ services:
       DEFAULT_UNITS: ${DEFAULT_UNITS:-metric}
     expose:
       - "3001"
+    networks:
+      - dokploy-network
     healthcheck:
       test:
         [
@@ -40,9 +42,15 @@ services:
         condition: service_started
     expose:
       - "80"
+    networks:
+      - dokploy-network
     healthcheck:
       test:
         ["CMD-SHELL", "wget -qO- http://localhost/ >/dev/null 2>&1 || exit 1"]
       interval: 30s
       timeout: 5s
       retries: 5
+
+networks:
+  dokploy-network:
+    external: true
